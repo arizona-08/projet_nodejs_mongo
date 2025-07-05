@@ -92,7 +92,6 @@ router.post('/login', async (req: Request, res: Response) => {
 })
 
 router.delete('/logout', verifyToken, async (req: Request, res: Response) => {
-  req.user = null;
   res.status(200).json({
     message: "Déconnexion réussie"
   })
