@@ -2,6 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import userRoutes from './routes/user.routes'
+import gymRoutes from './routes/gym.routes';
+import challengeRoutes from './routes/challenge.routes';
+import participationRoutes from './routes/participation.routes';
 
 dotenv.config();
 const app = express();
@@ -16,6 +19,9 @@ mongoose.connect(process.env.MONGO_URI as string)
 
 app.use(express.json());
 app.use('/users', userRoutes);
+app.use('/gyms', gymRoutes);
+app.use('/challenges', challengeRoutes);
+app.use('/', participationRoutes); // Les routes commencent par /participation
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
