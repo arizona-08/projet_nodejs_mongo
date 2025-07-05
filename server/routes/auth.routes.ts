@@ -4,6 +4,7 @@ import { User } from '../models/User';
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken'
 import dotenv from 'dotenv';
+import { verifyToken } from '../middlewares/verifyToken';
 
 dotenv.config();
 
@@ -22,6 +23,13 @@ async function hashPassword(password: string): Promise<string> {
 
 /**
  * @description Route pour l'inscription
+ * Payload attendu: 
+ * {
+ *  firstname: string
+ *  lastname: string
+ *  email: string
+ *  password: string
+ * }
  */
 router.post('/register', async (req: Request, res: Response) => {
   const {firstname, lastname, email, password} = req.body;
@@ -83,11 +91,12 @@ router.post('/login', async (req: Request, res: Response) => {
 
 })
 
-router.delete('/logout', async (req: Request, res: Response) => {
+router.delete('/logout', verifyToken, async (req: Request, res: Response) => {
   req.user = null;
   res.status(200).json({
     message: "Déconnexion réussie"
   })
+  return;
 })
 
 export default router

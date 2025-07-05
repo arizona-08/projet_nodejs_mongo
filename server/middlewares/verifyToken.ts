@@ -7,7 +7,8 @@ export function verifyToken(req: Request, res: Response, next: NextFunction){
   const token = authHeader && authHeader.split(' ')[1]; // Format: "Bearer VOTRE_TOKEN"
 
   if (!token) {
-    return res.status(403).json({ message: "Un token est requis pour l'authentification" });
+    res.status(403).json({ message: "Un token est requis pour l'authentification" });
+    return ;
   }
 
   try {
@@ -18,7 +19,8 @@ export function verifyToken(req: Request, res: Response, next: NextFunction){
     req.user = decoded; 
 
   } catch (err) {
-    return res.status(401).json({ message: "Token invalide ou expiré" });
+    res.status(401).json({ message: "Token invalide ou expiré" });
+    return ;
   }
 
   return next(); // Passe à la suite si le token est valide

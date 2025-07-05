@@ -8,6 +8,8 @@ import gymRoutes from './routes/gym.routes';
 import challengeRoutes from './routes/challenge.routes';
 import participationRoutes from './routes/participation.routes';
 
+// --------- | IMPORTANT : Les routes et middlewares doivent retounrer void !!!! | ---------
+
 dotenv.config();
 const app = express();
 
@@ -20,12 +22,12 @@ mongoose.connect(process.env.MONGO_URI as string)
 
 
 app.use(express.json());
+
+app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes);
 app.use('/api/gyms', gymRoutes);
 app.use('/api/challenges', challengeRoutes);
 app.use('/api', participationRoutes); // Les routes commencent par /participation
-app.use('/api/users', userRoutes);
-app.use('/api/auth', authRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
