@@ -4,8 +4,8 @@
  */
 import express, { Request, Response } from 'express';
 import { Gym } from '../models/Gym';
-import mongoose from 'mongoose';
 import { validateMongoId } from '../utils/idUtils';
+import { verifyToken } from '../middlewares/verifyToken';
 
 const router = express.Router();
 
@@ -20,12 +20,13 @@ const router = express.Router();
  *   "description": "Salle très équipée",
  *   "activities": ["musculation", "cardio"]
  * }
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.post('/gyms', async (req: Request, res: Response): Promise<any> => {
+router.post('/', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { name, address, equipments, description, activities } = req.body;
 
-  // Simuler un propriétaire (à remplacer par l'authentification réelle)
-  const owner = new mongoose.Types.ObjectId(); // ou req.user._id si auth
+  // Utilisateur authentifié comme propriétaire
+  const owner = req.user.id; // ID extrait du token JWT
 
   try {
     const newGym = new Gym({
@@ -46,11 +47,12 @@ router.post('/gyms', async (req: Request, res: Response): Promise<any> => {
 
 /**
  * [GET] http://localhost:3000/gyms/gyms/my
- * Voir toutes les salles créées par le propriétaire connecté (simulé ici)
+ * Voir toutes les salles créées par le propriétaire connecté
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.get('/gyms/my', async (req: Request, res: Response): Promise<any> => {
-  // Simuler un propriétaire (à remplacer par l'authentification réelle)
-  const ownerId = '000000000000000000000000'; // Remplacer par req.user._id si auth
+router.get('/my', verifyToken, async (req: Request, res: Response): Promise<any> => {
+  // Utiliser l'ID de l'utilisateur authentifié
+  const ownerId = req.user.id;
 
   try {
     const gyms = await Gym.find({ owner: ownerId });
@@ -70,12 +72,13 @@ router.get('/gyms/my', async (req: Request, res: Response): Promise<any> => {
  *   "name": "Nouvelle salle",
  *   "description": "Description mise à jour"
  * }
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.put('/gyms/:id', async (req: Request, res: Response): Promise<any> => {
+router.put('/:id', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
   const { name, address, equipments, description, activities } = req.body;
-  // Simuler un propriétaire (à remplacer par l'authentification réelle)
-  const ownerId = '000000000000000000000000'; // Remplacer par req.user._id si auth
+  // Utiliser l'ID de l'utilisateur authentifié
+  const ownerId = req.user.id;
 
   console.log('Requête PUT reçue pour /gyms/:id');
   console.log('Param ID =', id);
@@ -112,11 +115,12 @@ router.put('/gyms/:id', async (req: Request, res: Response): Promise<any> => {
  * [DELETE] http://localhost:3000/gyms/gyms/:id
  * Supprimer une salle de sport (propriétaire)
  * Paramètre : ID de la salle dans l'URL
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.delete('/gyms/:id', async (req: Request, res: Response): Promise<any> => {
+router.delete('/:id', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
-  // Simuler un propriétaire (à remplacer par l'authentification réelle)
-  const ownerId = '000000000000000000000000'; // Remplacer par req.user._id si auth
+  // Utiliser l'ID de l'utilisateur authentifié
+  const ownerId = req.user.id;
 
   try {
     const validatedId = validateMongoId(id);

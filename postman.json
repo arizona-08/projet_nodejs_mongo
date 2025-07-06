@@ -1,0 +1,488 @@
+{
+	"info": {
+		"_postman_id": "b54c22a2-e947-4ba7-9887-af454c171431",
+		"name": "projet node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21406596"
+	},
+	"item": [
+		{
+			"name": "OK S'inscrire",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstname\": \"test\",\r\n  \"lastname\": \"test\",\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Se connecter",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Récupérer les users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Créer une salle de gym",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Titanium Fitness\",\r\n  \"address\": \"45 rue du Muscle, Paris\",\r\n  \"equipments\": [\"haltères\", \"rameur\", \"tapis de course\"],\r\n  \"description\": \"Salle premium avec coaching personnalisé\",\r\n  \"activities\": [\"crossfit\", \"yoga\", \"cardio\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/gyms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"gyms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Voir mes salle de gym",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/gyms/my",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"gyms",
+						"my"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Modifier une salle de gym",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Sane\",\r\n  \"address\": \"12uscu\",\r\n  \"equipments\": [\"tapis\", \"haltères\", \"rameur\"],\r\n  \"description\": \"Une e pour tous niveaux\",\r\n  \"activities\": [\"cardio\", \"musculation\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/gyms/gyms/686a4ee66d0156da0bc60f54",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"gyms",
+						"gyms",
+						"686a4ee66d0156da0bc60f54"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Supprimer une salle de gym",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "\tapplication/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/gyms/gyms/68680dd10b95f6398dd280b4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gyms",
+						"gyms",
+						"68680dd10b95f6398dd280b4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK créer un challenge",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Déf0 min\",\r\n  \"description\": \"Brûlez un max de calories\",\r\n  \"duration\": 20,\r\n  \"difficulty\": \"moyen\",\r\n  \"type\": \"cardio\",\r\n  \"gym\": \"6866f77867bc89b13cdea541\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/challenges/challenges",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"challenges",
+						"challenges"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Récupérer les challenges",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/challenges/challenges",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"challenges",
+						"challenges"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Récupérer mes challenges",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/challenges/challenges/mine",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"challenges",
+						"challenges",
+						"mine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Récupérer le challenge d'une salle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/challenges/challenges/gym/6866f77867bc89b13cdea541",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"challenges",
+						"challenges",
+						"gym",
+						"6866f77867bc89b13cdea541"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Modifier un challenge",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"Mise à jour du défi : 150 pompes par jour\",\r\n  \"duration\": 20\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/challenges/686a546be797bebac0c3a314",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"challenges",
+						"686a546be797bebac0c3a314"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Supprimer un challenge",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/challenges/686a4fe06d0156da0bc60f5b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"challenges",
+						"686a4fe06d0156da0bc60f5b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Rejoindre un challenge (participation)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/challenges/686a546be797bebac0c3a314/join",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"challenges",
+						"686a546be797bebac0c3a314",
+						"join"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Voir mes participation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/participations/mine",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"participations",
+						"mine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OK Marquer une participation comme terminée",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/participations/686a550ae797bebac0c3a320/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"participations",
+						"686a550ae797bebac0c3a320",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
