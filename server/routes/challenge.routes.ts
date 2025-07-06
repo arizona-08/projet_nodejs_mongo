@@ -1,18 +1,19 @@
 import express, { Request, Response } from 'express';
-import mongoose from 'mongoose';
 import { Challenge } from '../models/Challenge';
 import { validateMongoId } from '../utils/idUtils';
 import { ChallengeParticipation } from '../models/ChallengeParticipation';
+import { verifyToken } from '../middlewares/verifyToken';
 
 const router = express.Router();
 
 /**
  * POST /challenges
  * Créer un nouveau défi
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.post('/', async (req: Request, res: Response): Promise<any> => {
+router.post('/', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { title, description, duration, difficulty, type, gym } = req.body;
-  const creator = new mongoose.Types.ObjectId(); // À remplacer par req.user._id
+  const creator = req.user.id; // ID extrait du token JWT
 
   try {
     const newChallenge = new Challenge({
@@ -53,9 +54,10 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
 /**
  * GET /challenges/mine
  * Voir les défis créés par l'utilisateur connecté
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.get('/mine', async (req: Request, res: Response): Promise<any> => {
-  const creatorId = '000000000000000000000000'; // Remplacer par req.user._id
+router.get('/mine', verifyToken, async (req: Request, res: Response): Promise<any> => {
+  const creatorId = req.user.id; // ID extrait du token JWT
 
   try {
     const challenges = await Challenge.find({ creator: creatorId });
@@ -83,11 +85,12 @@ router.get('/gym/:gymId', async (req: Request, res: Response): Promise<any> => {
 /**
  * PUT /challenges/:id
  * Modifier un défi créé par l'utilisateur
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.put('/:id', async (req: Request, res: Response): Promise<any> => {
+router.put('/:id', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
   const { title, description, duration, difficulty, type } = req.body;
-  const creatorId = '000000000000000000000000'; // À remplacer par req.user._id
+  const creatorId = req.user.id; // ID extrait du token JWT
 
   const validatedId = validateMongoId(id);
   if (!validatedId.valid) {
@@ -118,10 +121,11 @@ router.put('/:id', async (req: Request, res: Response): Promise<any> => {
 /**
  * DELETE /challenges/:id
  * Supprimer un défi créé par l'utilisateur
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.delete('/:id', async (req: Request, res: Response): Promise<any> => {
+router.delete('/:id', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
-  const creatorId = '000000000000000000000000'; // À remplacer par req.user._id
+  const creatorId = req.user.id; // ID extrait du token JWT
 
   const validatedId = validateMongoId(id);
   if (!validatedId.valid) {
@@ -146,10 +150,11 @@ router.delete('/:id', async (req: Request, res: Response): Promise<any> => {
 /**
  * POST /challenges/:id/join
  * Rejoindre un défi social (crée une participation)
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.post('/:id/join', async (req: Request, res: Response): Promise<any> => {
+router.post('/:id/join', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
-  const userId = '000000000000000000000000'; // À remplacer par req.user._id
+  const userId = req.user.id; // ID extrait du token JWT
 
   const validatedId = validateMongoId(id);
   if (!validatedId.valid) {

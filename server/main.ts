@@ -27,7 +27,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes);
 app.use('/api/gyms', gymRoutes);
 app.use('/api/challenges', challengeRoutes);
-app.use('/api', participationRoutes); // Les routes commencent par /participation
+app.use('/api/participations', participationRoutes); 
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');

@@ -4,16 +4,18 @@
 import express, { Request, Response } from 'express';
 import { ChallengeParticipation } from '../models/ChallengeParticipation';
 import { validateMongoId } from '../utils/idUtils';
+import { verifyToken } from '../middlewares/verifyToken';
 
 const router = express.Router();
 
 /**
  * PATCH /participations/:id/complete
  * Marquer un défi comme terminé par le participant
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.patch('/:id/complete', async (req: Request, res: Response): Promise<any> => {
+router.patch('/:id/complete', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
-  const userId = '000000000000000000000000'; // Remplacer par req.user._id avec auth
+  const userId = req.user.id; // ID extrait du token JWT
 
   const validatedId = validateMongoId(id);
   if (!validatedId.valid) {
@@ -42,10 +44,11 @@ router.patch('/:id/complete', async (req: Request, res: Response): Promise<any> 
 
 /**
  * GET /participations/mine
- * Récupérer tous les défis auxquels l’utilisateur a participé
+ * Récupérer tous les défis auxquels l'utilisateur a participé
+ * Authentification requise: Bearer Token dans le header Authorization
  */
-router.get('/mine', async (req: Request, res: Response): Promise<any> => {
-  const userId = '000000000000000000000000'; // Remplacer par req.user._id avec auth
+router.get('/mine', verifyToken, async (req: Request, res: Response): Promise<any> => {
+  const userId = req.user.id; // ID extrait du token JWT
 
   try {
     const participations = await ChallengeParticipation.find({ user: userId }).populate('challenge');
