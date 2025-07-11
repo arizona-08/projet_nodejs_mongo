@@ -3,10 +3,12 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
 import authRoutes from './routes/auth.routes';
-import userRoutes from './routes/user.routes'
 import gymRoutes from './routes/gym.routes';
 import challengeRoutes from './routes/challenge.routes';
 import participationRoutes from './routes/participation.routes';
+
+import userRoutes from './routes/admin/user.routes'
+import adminGymRoutes from './routes/admin/gym.routes'
 
 // --------- | IMPORTANT : Les routes et middlewares doivent retounrer void !!!! | ---------
 
@@ -24,7 +26,8 @@ mongoose.connect(process.env.MONGO_URI as string)
 app.use(express.json());
 
 app.use('/api/auth', authRoutes)
-app.use('/api/users', userRoutes);
+app.use('/api/admin/users', userRoutes);
+app.use('/api/admin/gyms', adminGymRoutes);
 app.use('/api/gyms', gymRoutes);
 app.use('/api/challenges', challengeRoutes);
 app.use('/api/participations', participationRoutes); 
