@@ -31,7 +31,17 @@ async function hashPassword(password: string): Promise<string> {
  *  password: string
  * }
  */
-router.post('/register', async (req: Request, res: Response) => {
+router.post('/register/:role', async (req: Request, res: Response) => {
+  const role = req.params.role;
+  const unprotectedRoles = ['client', 'gym-owner']
+
+  if(!unprotectedRoles.includes(role)){
+    res.status(404).send({
+      error: `Le rôle ${role} n'existe pas.`
+    })
+    return;
+  }
+
   const {firstname, lastname, email, password} = req.body;
 
   try {
@@ -39,7 +49,8 @@ router.post('/register', async (req: Request, res: Response) => {
         firstname: firstname,
         lastname: lastname,
         email: email,
-        password: await hashPassword(password)
+        password: await hashPassword(password),
+        role: role
       })
   
       await newUser.save()
