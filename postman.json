@@ -483,6 +483,119 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Gyms (admin)",
+			"item": [
+				{
+					"name": "Voir toutes les salles",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approuver une salle",
+					"request": {
+						"method": "PATCH",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms/approve/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"approve",
+								":id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Désapprouver une salle",
+					"request": {
+						"method": "PATCH",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms/disapprove/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"disapprove",
+								":id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une salle",
+					"request": {
+						"method": "PUT",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms/edit/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"edit",
+								":id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une salle",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms/delete/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"delete",
+								":id"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
