@@ -596,6 +596,125 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Type exercice (admin)",
+			"item": [
+				{
+					"name": "Créer un type d'exercice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Squat\",\n  \"description\": \"Exercice pour les jambes\",\n  \"targetedMuscles\": [\"quadriceps\", \"fessiers\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/exercices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"exercices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir tous les types d'exercice",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/exercices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"exercices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un type d'exercice",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Squat modifié\",\n  \"description\": \"Nouveau descriptif\",\n  \"targetedMuscles\": [\"quadriceps\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/exercices/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"exercices",
+								":id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un type d'exercice",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/exercices/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"exercices",
+								":id"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
