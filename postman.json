@@ -918,6 +918,152 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Catégories (admin)",
+			"item": [
+				{
+					"name": "Créer une catégorie",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cardio\",\n  \"type\": \"exercise\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/categories",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "categories"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir toutes les catégories",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/categories",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "categories"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une catégorie",
+					"request": {
+						"method": "PUT",
+						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cardio avancé\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/categories/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "categories", ":id"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une catégorie",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/categories/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "categories", ":id"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Filtres (admin)",
+			"item": [
+				{
+					"name": "Créer un filtre",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sans matériel\",\n  \"type\": \"exercise\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/filters",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "filters"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir tous les filtres",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/filters",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "filters"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un filtre",
+					"request": {
+						"method": "PUT",
+						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sans matériel (débutant)\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/filters/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "filters", ":id"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un filtre",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/filters/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "filters", ":id"]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
