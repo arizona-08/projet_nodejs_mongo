@@ -72,7 +72,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/users/",
+					"raw": "http://localhost:3000/api/admin/users/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -712,6 +712,107 @@
 							]
 						}
 					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Badges (admin)",
+			"item": [
+				{
+					"name": "Créer un badge",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Champion\",\n  \"description\": \"A terminé tous les challenges\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "http://localhost:3000/api/admin/badges", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges"] }
+					},
+					"response": []
+				},
+				{
+					"name": "Voir tous les badges",
+					"request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/admin/badges", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges"] } },
+					"response": []
+				},
+				{
+					"name": "Modifier un badge",
+					"request": {
+						"method": "PUT",
+						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Champion modifié\",\n  \"description\": \"Description modifiée\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "http://localhost:3000/api/admin/badges/:id", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges", ":id"] }
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un badge",
+					"request": { "method": "DELETE", "url": { "raw": "http://localhost:3000/api/admin/badges/:id", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges", ":id"] } },
+					"response": []
+				},
+				{
+					"name": "Attribuer un badge à un user",
+					"request": { "method": "POST", "url": { "raw": "http://localhost:3000/api/admin/badges/give/:userId/:badgeId", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges", "give", ":userId", ":badgeId"] } },
+					"response": []
+				},
+				{
+					"name": "Retirer un badge à un user",
+					"request": { "method": "POST", "url": { "raw": "http://localhost:3000/api/admin/badges/remove/:userId/:badgeId", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges", "remove", ":userId", ":badgeId"] } },
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Récompenses (admin)",
+			"item": [
+				{
+					"name": "Créer une récompense",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"all_badges\",\n  \"description\": \"A obtenu tous les badges\",\n  \"condition\": \"all_badges\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "http://localhost:3000/api/admin/rewards", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards"] }
+					},
+					"response": []
+				},
+				{
+					"name": "Voir toutes les récompenses",
+					"request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/admin/rewards", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards"] } },
+					"response": []
+				},
+				{
+					"name": "Modifier une récompense",
+					"request": {
+						"method": "PUT",
+						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Maître du fitness modifié\",\n  \"description\": \"Description modifiée\",\n  \"condition\": \"all_badges\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "http://localhost:3000/api/admin/rewards/:id", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards", ":id"] }
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une récompense",
+					"request": { "method": "DELETE", "url": { "raw": "http://localhost:3000/api/admin/rewards/:id", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards", ":id"] } },
+					"response": []
+				},
+				{
+					"name": "Attribuer automatiquement une récompense (tous les badges)",
+					"request": { "method": "POST", "url": { "raw": "http://localhost:3000/api/admin/rewards/auto/assign/:userId", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards", "auto", "assign", ":userId"] } },
 					"response": []
 				}
 			]
