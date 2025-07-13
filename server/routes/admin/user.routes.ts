@@ -9,10 +9,9 @@ import { roles } from '../../utils/roles'
 const router = express.Router()
 
 router.get('/', verifyToken, authorizeRoles('admin'), async (_req, res) => {
-  const users = await User.find()
-  res.json(users)
-  res.send('User route is working!')
-})
+  const users = await User.find();
+  res.json(users);
+});
 
 router.post('/create', verifyToken, authorizeRoles('admin'), async (req, res) => {
   const { firstname, lastname, email, password } = req.body
