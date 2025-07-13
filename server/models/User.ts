@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   password: {type: String, required: true},
   role: {type: String, required: true},
   badges: [{ type: mongoose.Schema.Types.ObjectId, ref: "Badge" }],
-  rewards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reward" }]
+  rewards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reward" }],
+  active: { type: Boolean, default: true }
 })
 
 export const User = mongoose.model('User', userSchema)

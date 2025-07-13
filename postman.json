@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "OK S'inscrire",
+			"name": "OK S'inscrire (ajouter /client ou /gym-owner)",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/auth/register",
+					"raw": "http://localhost:3000/api/auth/register/:role",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -813,6 +813,108 @@
 				{
 					"name": "Attribuer automatiquement une récompense (tous les badges)",
 					"request": { "method": "POST", "url": { "raw": "http://localhost:3000/api/admin/rewards/auto/assign/:userId", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards", "auto", "assign", ":userId"] } },
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "status utilisateurs (admin)",
+			"item": [
+				{
+					"name": "Voir les utilisateurs actifs",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/status/active",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "status", "active"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir les utilisateurs inactifs",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/status/inactive",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "status", "inactive"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Désactiver un utilisateur",
+					"request": {
+						"method": "PATCH",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/status/deactivate/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "status", "deactivate", ":id"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activer un utilisateur",
+					"request": {
+						"method": "PATCH",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/status/activate/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "status", "activate", ":id"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Utilisateurs (admin)",
+			"item": [
+				{
+					"name": "Créer un utilisateur",
+					"request": {
+						"method": "POST",
+						"header": [
+							{ "key": "Content-Type", "value": "application/json", "type": "text" }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstname\": \"Admin\",\n  \"lastname\": \"Test\",\n  \"email\": \"admin@test.com\",\n  \"password\": \"123456\",\n  \"role\": \"proprietaire\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/users/create",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "users", "create"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un utilisateur",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:3000/api/admin/users/delete-user/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "3000",
+							"path": ["api", "admin", "users", "delete-user", ":id"]
+						}
+					},
 					"response": []
 				}
 			]

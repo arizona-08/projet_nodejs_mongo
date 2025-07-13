@@ -12,6 +12,7 @@ import adminGymRoutes from './routes/admin/gym.routes'
 import adminExercicesRoutes from './routes/admin/exercices.routes';
 import adminBadgesRoutes from './routes/admin/badges.route';
 import adminRewardsRoutes from './routes/admin/rewards.route';
+import adminStatusRoutes from './routes/admin/status.routes';
 
 // --------- | IMPORTANT : Les routes et middlewares doivent retounrer void !!!! | ---------
 
@@ -37,6 +38,7 @@ app.use('/api/participations', participationRoutes);
 app.use('/api/admin/exercices', adminExercicesRoutes);
 app.use('/api/admin/badges', adminBadgesRoutes);
 app.use('/api/admin/rewards', adminRewardsRoutes);
+app.use('/api/admin/status', adminStatusRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
