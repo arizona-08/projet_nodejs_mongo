@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   role: {type: String, required: true},
   badges: [{ type: mongoose.Schema.Types.ObjectId, ref: "Badge" }],
   rewards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reward" }],
-  active: { type: Boolean, default: true }
+  active: { type: Boolean, default: true },
+  participation_count: {type: Number, default: 0}
 })
 
 export const User = mongoose.model('User', userSchema)

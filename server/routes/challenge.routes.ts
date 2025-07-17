@@ -12,7 +12,7 @@ const router = express.Router();
  * Authentification requise: Bearer Token dans le header Authorization
  */
 router.post('/', verifyToken, async (req: Request, res: Response): Promise<any> => {
-  const { title, description, duration, difficulty, type, gym } = req.body;
+  const { title, description, duration, difficulty, type, gym, exercises } = req.body;
   const creator = req.user.id; // ID extrait du token JWT
 
   try {
@@ -24,6 +24,7 @@ router.post('/', verifyToken, async (req: Request, res: Response): Promise<any> 
       type,
       creator,
       gym,
+      exercises
     });
     await newChallenge.save();
     res.status(201).json(newChallenge);
@@ -89,7 +90,7 @@ router.get('/gym/:gymId', async (req: Request, res: Response): Promise<any> => {
  */
 router.put('/:id', verifyToken, async (req: Request, res: Response): Promise<any> => {
   const { id } = req.params;
-  const { title, description, duration, difficulty, type } = req.body;
+  const { title, description, duration, difficulty, type, exercises } = req.body;
   const creatorId = req.user.id; // ID extrait du token JWT
 
   const validatedId = validateMongoId(id);
@@ -109,6 +110,7 @@ router.put('/:id', verifyToken, async (req: Request, res: Response): Promise<any
     challenge.duration = duration ?? challenge.duration;
     challenge.difficulty = difficulty ?? challenge.difficulty;
     challenge.type = type ?? challenge.type;
+    challenge.exercises = exercises ?? challenge.exercises;
 
     await challenge.save();
     res.json(challenge);
@@ -170,11 +172,18 @@ router.post('/:id/join', verifyToken, async (req: Request, res: Response): Promi
       return res.status(400).json({ message: 'Déjà inscrit à ce défi' });
     }
 
+    const challengeExercisesIds = challenge.exercises;
+    const progressionData = challengeExercisesIds.map(exerciseId => {
+      return {
+        exercise: exerciseId
+      };
+    });
     const participation = new ChallengeParticipation({
       challenge: id,
       user: userId,
       status: 'en cours',
       startedAt: new Date(),
+      progression: progressionData
     });
 
     await participation.save();
