@@ -7,9 +7,9 @@ const router = Router();
 
 // Créer un type d'exercice
 router.post('/', verifyToken, authorizeRoles('admin'), async (req: Request, res: Response) => {
-  const { name, description, muscles } = req.body;
+  const { name, description, muscles, calories } = req.body;
   try {
-    const exercise = new ExerciseType({ name, description, muscles });
+    const exercise = new ExerciseType({ name, description, muscles, calories });
     await exercise.save();
     res.status(201).json({ message: "Type d'exercice créé", exercise });
   } catch (error) {
@@ -30,11 +30,11 @@ router.get('/', verifyToken, authorizeRoles('admin'), async (_req: Request, res:
 // Modifier un type d'exercice
 router.put('/:id', verifyToken, authorizeRoles('admin'), async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, description, muscles } = req.body;
+  const { name, description, muscles, calories } = req.body;
   try {
     const exercise = await ExerciseType.findByIdAndUpdate(
       id,
-      { name, description, muscles },
+      { name, description, muscles, calories },
       { new: true }
     );
     if (!exercise) {

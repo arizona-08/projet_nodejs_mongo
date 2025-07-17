@@ -10,6 +10,7 @@ export interface IChallenge extends Document {
   type: string;
   creator: mongoose.Types.ObjectId;
   gym: mongoose.Types.ObjectId;
+  exercises: mongoose.Types.ObjectId[];
 }
 
 const ChallengeSchema: Schema = new Schema({
@@ -20,6 +21,7 @@ const ChallengeSchema: Schema = new Schema({
   type: { type: String, required: true },
   creator: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   gym: { type: Schema.Types.ObjectId, ref: 'Gym', required: true },
+  exercises: { type: [Schema.Types.ObjectId], ref: 'ExerciseType', required: true}
 });
 
 export const Challenge = mongoose.model<IChallenge>('Challenge', ChallengeSchema);
