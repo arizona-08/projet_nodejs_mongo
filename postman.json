@@ -1,11 +1,1119 @@
 {
 	"info": {
-		"_postman_id": "b54c22a2-e947-4ba7-9887-af454c171431",
+		"_postman_id": "bfbbb698-d16a-497c-b5dd-85aff1fd5bfc",
 		"name": "projet node",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21406596"
+		"_exporter_id": "26777902"
 	},
 	"item": [
+		{
+			"name": "Gyms (admin)",
+			"item": [
+				{
+					"name": "Voir toutes les salles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YjFkNWY2ZDc1MDBjYTc1N2JmMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mjc4NDAwMiwiZXhwIjoxNzUyNzg3NjAyfQ.mDCMSwIkP8Cu8k8PEMNyOAZIG2Un_tZsVNcMD6W0vWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approuver une salle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YjFkNWY2ZDc1MDBjYTc1N2JmMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mjc4NDAwMiwiZXhwIjoxNzUyNzg3NjAyfQ.mDCMSwIkP8Cu8k8PEMNyOAZIG2Un_tZsVNcMD6W0vWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms/approve/68795bdd5f6d7500ca757bf7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"approve",
+								"68795bdd5f6d7500ca757bf7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Désapprouver une salle",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms/disapprove/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"disapprove",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une salle",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms/edit/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"edit",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une salle",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/gyms/delete/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Type exercice (admin)",
+			"item": [
+				{
+					"name": "Créer un type d'exercice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YjFkNWY2ZDc1MDBjYTc1N2JmMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mjc4NDAwMiwiZXhwIjoxNzUyNzg3NjAyfQ.mDCMSwIkP8Cu8k8PEMNyOAZIG2Un_tZsVNcMD6W0vWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Push-ups\",\n  \"description\": \"Exercice pour les pecs et triceps\",\n  \"targetedMuscles\": [\"pectoraux\", \"triceps\", \"biceps\"],\n  \"calories\" : 145\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/exercices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"exercices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir tous les types d'exercice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YjFkNWY2ZDc1MDBjYTc1N2JmMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mjc4NDAwMiwiZXhwIjoxNzUyNzg3NjAyfQ.mDCMSwIkP8Cu8k8PEMNyOAZIG2Un_tZsVNcMD6W0vWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/exercices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"exercices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un type d'exercice",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Squat modifié\",\n  \"description\": \"Nouveau descriptif\",\n  \"targetedMuscles\": [\"quadriceps\"],\n  \"calories\": 103\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/exercices/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"exercices",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un type d'exercice",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/exercices/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"exercices",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Badges (admin)",
+			"item": [
+				{
+					"name": "Créer un badge",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Champion\",\n  \"description\": \"A terminé tous les challenges\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/badges",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"badges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir tous les badges",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/badges",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"badges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un badge",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Champion modifié\",\n  \"description\": \"Description modifiée\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/badges/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"badges",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un badge",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/badges/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"badges",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attribuer un badge à un user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/badges/give/:userId/:badgeId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"badges",
+								"give",
+								":userId",
+								":badgeId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								},
+								{
+									"key": "badgeId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retirer un badge à un user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/badges/remove/:userId/:badgeId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"badges",
+								"remove",
+								":userId",
+								":badgeId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								},
+								{
+									"key": "badgeId"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Récompenses (admin)",
+			"item": [
+				{
+					"name": "Créer une récompense",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"all_badges\",\n  \"description\": \"A obtenu tous les badges\",\n  \"condition\": \"all_badges\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/rewards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"rewards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir toutes les récompenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/rewards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"rewards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une récompense",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Maître du fitness modifié\",\n  \"description\": \"Description modifiée\",\n  \"condition\": \"all_badges\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/rewards/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"rewards",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une récompense",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/rewards/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"rewards",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attribuer automatiquement une récompense (tous les badges)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/rewards/auto/assign/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"rewards",
+								"auto",
+								"assign",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "status utilisateurs (admin)",
+			"item": [
+				{
+					"name": "Voir les utilisateurs actifs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/status/active",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"status",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir les utilisateurs inactifs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/status/inactive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"status",
+								"inactive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Désactiver un utilisateur",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/status/deactivate/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"status",
+								"deactivate",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activer un utilisateur",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/status/activate/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"status",
+								"activate",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Utilisateurs (admin)",
+			"item": [
+				{
+					"name": "Créer un utilisateur",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstname\": \"Admin\",\n  \"lastname\": \"Test\",\n  \"email\": \"admin@test.com\",\n  \"password\": \"123456\",\n  \"role\": \"proprietaire\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/users/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un utilisateur",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzBlZjZmMzk1YmQzNzlhMjFmZGJhMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjI0ODk5NCwiZXhwIjoxNzUyMjUyNTk0fQ.gWtX73n7WfQdd5BjmlRpSumaN1N0tMcaxlzaOSC9IxE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/users/delete-user/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"users",
+								"delete-user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catégories (admin)",
+			"item": [
+				{
+					"name": "Créer une catégorie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cardio\",\n  \"type\": \"exercise\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir toutes les catégories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une catégorie",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cardio avancé\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/categories/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une catégorie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/categories/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Filtres (admin)",
+			"item": [
+				{
+					"name": "Créer un filtre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sans matériel\",\n  \"type\": \"exercise\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/filters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"filters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir tous les filtres",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/filters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"filters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un filtre",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sans matériel (débutant)\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/admin/filters/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"filters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un filtre",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/admin/filters/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"admin",
+								"filters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "OK S'inscrire (ajouter /client ou /gym-owner)",
 			"request": {
@@ -13,7 +1121,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"firstname\": \"test\",\r\n  \"lastname\": \"test\",\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"123456\"\r\n}",
+					"raw": "{\r\n  \"firstname\": \"jonh\",\r\n  \"lastname\": \"doe\",\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"123456\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,7 +1129,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/auth/register/:role",
+					"raw": "http://localhost:3000/api/auth/register/client",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -30,7 +1138,8 @@
 					"path": [
 						"api",
 						"auth",
-						"register"
+						"register",
+						"client"
 					]
 				}
 			},
@@ -72,7 +1181,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/admin/users/",
+					"raw": "http://localhost:3000/api/users/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -95,7 +1204,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YWJhNWY2ZDc1MDBjYTc1N2JmMSIsInJvbGUiOiJneW0tb3duZXIiLCJpYXQiOjE3NTI3ODM4MDYsImV4cCI6MTc1Mjc4NzQwNn0.Z4Hx_Z4BcOoaeSRQHbmhkHacz8OvyB7oevSp9m4Sx1E",
 							"type": "string"
 						}
 					]
@@ -229,11 +1338,21 @@
 		{
 			"name": "OK créer un challenge",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1OGQxNWY2ZDc1MDBjYTc1N2JlZCIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTIzNzUsImV4cCI6MTc1Mjc5NTk3NX0.u8uPjN3AXp5KHPlXVW6OwSw1x3g-HMoVeNmVqzWF91I",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"Déf0 min\",\r\n  \"description\": \"Brûlez un max de calories\",\r\n  \"duration\": 20,\r\n  \"difficulty\": \"moyen\",\r\n  \"type\": \"cardio\",\r\n  \"gym\": \"6866f77867bc89b13cdea541\"\r\n}\r\n",
+					"raw": "{\r\n  \"title\": \"defi push-up\",\r\n  \"description\": \"Faites 100 pompes le plus rapidement possible\",\r\n  \"duration\": 20,\r\n  \"difficulty\": \"moyen\",\r\n  \"type\": \"renforcement musculaire\",\r\n  \"gym\": \"68795bdd5f6d7500ca757bf7\",\r\n  \"exercises\" : [\"68795df15f6d7500ca757c00\"]\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -241,15 +1360,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/challenges/challenges",
+					"raw": "http://localhost:3000/api/challenges/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"api",
 						"challenges",
-						"challenges"
+						""
 					]
 				}
 			},
@@ -261,14 +1381,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/challenges/challenges",
+					"raw": "http://localhost:3000/api/challenges",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"challenges",
+						"api",
 						"challenges"
 					]
 				}
@@ -397,7 +1517,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk2MWQyNWZmNmJkMDhhM2Q5NzQzNyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTI1NDksImV4cCI6MTc1Mjc5NjE0OX0.Utu4tEjUE2o8bJ9et3WSco2xeJ4x7bbKT_AD1Ge_8s0",
 							"type": "string"
 						}
 					]
@@ -405,7 +1525,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/challenges/686a546be797bebac0c3a314/join",
+					"raw": "http://localhost:3000/api/challenges/68797dbc115d8e6a0fc0d0ba/join",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -414,7 +1534,7 @@
 					"path": [
 						"api",
 						"challenges",
-						"686a546be797bebac0c3a314",
+						"68797dbc115d8e6a0fc0d0ba",
 						"join"
 					]
 				}
@@ -429,7 +1549,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk2MWQyNWZmNmJkMDhhM2Q5NzQzNyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTI1NDksImV4cCI6MTc1Mjc5NjE0OX0.Utu4tEjUE2o8bJ9et3WSco2xeJ4x7bbKT_AD1Ge_8s0",
 							"type": "string"
 						}
 					]
@@ -453,22 +1573,31 @@
 			"response": []
 		},
 		{
-			"name": "OK Marquer une participation comme terminée",
+			"name": "OK Mettre à jour sa progression",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk2MWQyNWZmNmJkMDhhM2Q5NzQzNyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTI1NDksImV4cCI6MTc1Mjc5NjE0OX0.Utu4tEjUE2o8bJ9et3WSco2xeJ4x7bbKT_AD1Ge_8s0",
 							"type": "string"
 						}
 					]
 				},
 				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"exerciseId\": \"68795df15f6d7500ca757c00\",\r\n    \"duration_sec\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:3000/api/participations/686a550ae797bebac0c3a320/complete",
+					"raw": "http://localhost:3000/api/participations/:participation_id/update-progression",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -477,593 +1606,56 @@
 					"path": [
 						"api",
 						"participations",
-						"686a550ae797bebac0c3a320",
-						"complete"
+						":participation_id",
+						"update-progression"
+					],
+					"variable": [
+						{
+							"key": "participation_id",
+							"value": ""
+						}
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Gyms (admin)",
-			"item": [
-				{
-					"name": "Voir toutes les salles",
-					"request": {
-						"method": "GET",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"gyms"
-							]
+			"name": "OK Marquer une participation comme terminée",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk2MWQyNWZmNmJkMDhhM2Q5NzQzNyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTI1NDksImV4cCI6MTc1Mjc5NjE0OX0.Utu4tEjUE2o8bJ9et3WSco2xeJ4x7bbKT_AD1Ge_8s0",
+							"type": "string"
 						}
-					},
-					"response": []
+					]
 				},
-				{
-					"name": "Approuver une salle",
-					"request": {
-						"method": "PATCH",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms/approve/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"gyms",
-								"approve",
-								":id"
-							]
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/participations/:participation_id/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"participations",
+						":participation_id",
+						"complete"
+					],
+					"variable": [
+						{
+							"key": "participation_id",
+							"value": ""
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Désapprouver une salle",
-					"request": {
-						"method": "PATCH",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms/disapprove/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"gyms",
-								"disapprove",
-								":id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Modifier une salle",
-					"request": {
-						"method": "PUT",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms/edit/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"gyms",
-								"edit",
-								":id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Supprimer une salle",
-					"request": {
-						"method": "DELETE",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms/delete/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"gyms",
-								"delete",
-								":id"
-							]
-						}
-					},
-					"response": []
+					]
 				}
-			]
-		},
-		{
-			"name": "Type exercice (admin)",
-			"item": [
-				{
-					"name": "Créer un type d'exercice",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Squat\",\n  \"description\": \"Exercice pour les jambes\",\n  \"targetedMuscles\": [\"quadriceps\", \"fessiers\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/exercices",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"exercices"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Voir tous les types d'exercice",
-					"request": {
-						"method": "GET",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/exercices",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"exercices"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Modifier un type d'exercice",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Squat modifié\",\n  \"description\": \"Nouveau descriptif\",\n  \"targetedMuscles\": [\"quadriceps\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/exercices/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"exercices",
-								":id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Supprimer un type d'exercice",
-					"request": {
-						"method": "DELETE",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/exercices/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"exercices",
-								":id"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Badges (admin)",
-			"item": [
-				{
-					"name": "Créer un badge",
-					"request": {
-						"method": "POST",
-						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Champion\",\n  \"description\": \"A terminé tous les challenges\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": { "raw": "http://localhost:3000/api/admin/badges", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges"] }
-					},
-					"response": []
-				},
-				{
-					"name": "Voir tous les badges",
-					"request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/admin/badges", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges"] } },
-					"response": []
-				},
-				{
-					"name": "Modifier un badge",
-					"request": {
-						"method": "PUT",
-						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Champion modifié\",\n  \"description\": \"Description modifiée\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": { "raw": "http://localhost:3000/api/admin/badges/:id", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges", ":id"] }
-					},
-					"response": []
-				},
-				{
-					"name": "Supprimer un badge",
-					"request": { "method": "DELETE", "url": { "raw": "http://localhost:3000/api/admin/badges/:id", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges", ":id"] } },
-					"response": []
-				},
-				{
-					"name": "Attribuer un badge à un user",
-					"request": { "method": "POST", "url": { "raw": "http://localhost:3000/api/admin/badges/give/:userId/:badgeId", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges", "give", ":userId", ":badgeId"] } },
-					"response": []
-				},
-				{
-					"name": "Retirer un badge à un user",
-					"request": { "method": "POST", "url": { "raw": "http://localhost:3000/api/admin/badges/remove/:userId/:badgeId", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "badges", "remove", ":userId", ":badgeId"] } },
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Récompenses (admin)",
-			"item": [
-				{
-					"name": "Créer une récompense",
-					"request": {
-						"method": "POST",
-						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"all_badges\",\n  \"description\": \"A obtenu tous les badges\",\n  \"condition\": \"all_badges\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": { "raw": "http://localhost:3000/api/admin/rewards", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards"] }
-					},
-					"response": []
-				},
-				{
-					"name": "Voir toutes les récompenses",
-					"request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/admin/rewards", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards"] } },
-					"response": []
-				},
-				{
-					"name": "Modifier une récompense",
-					"request": {
-						"method": "PUT",
-						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Maître du fitness modifié\",\n  \"description\": \"Description modifiée\",\n  \"condition\": \"all_badges\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": { "raw": "http://localhost:3000/api/admin/rewards/:id", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards", ":id"] }
-					},
-					"response": []
-				},
-				{
-					"name": "Supprimer une récompense",
-					"request": { "method": "DELETE", "url": { "raw": "http://localhost:3000/api/admin/rewards/:id", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards", ":id"] } },
-					"response": []
-				},
-				{
-					"name": "Attribuer automatiquement une récompense (tous les badges)",
-					"request": { "method": "POST", "url": { "raw": "http://localhost:3000/api/admin/rewards/auto/assign/:userId", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "admin", "rewards", "auto", "assign", ":userId"] } },
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "status utilisateurs (admin)",
-			"item": [
-				{
-					"name": "Voir les utilisateurs actifs",
-					"request": {
-						"method": "GET",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/status/active",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "status", "active"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Voir les utilisateurs inactifs",
-					"request": {
-						"method": "GET",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/status/inactive",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "status", "inactive"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Désactiver un utilisateur",
-					"request": {
-						"method": "PATCH",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/status/deactivate/:id",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "status", "deactivate", ":id"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Activer un utilisateur",
-					"request": {
-						"method": "PATCH",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/status/activate/:id",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "status", "activate", ":id"]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Utilisateurs (admin)",
-			"item": [
-				{
-					"name": "Créer un utilisateur",
-					"request": {
-						"method": "POST",
-						"header": [
-							{ "key": "Content-Type", "value": "application/json", "type": "text" }
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"firstname\": \"Admin\",\n  \"lastname\": \"Test\",\n  \"email\": \"admin@test.com\",\n  \"password\": \"123456\",\n  \"role\": \"proprietaire\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/users/create",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "users", "create"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Supprimer un utilisateur",
-					"request": {
-						"method": "DELETE",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/users/delete-user/:id",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "users", "delete-user", ":id"]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Catégories (admin)",
-			"item": [
-				{
-					"name": "Créer une catégorie",
-					"request": {
-						"method": "POST",
-						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Cardio\",\n  \"type\": \"exercise\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/categories",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "categories"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Voir toutes les catégories",
-					"request": {
-						"method": "GET",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/categories",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "categories"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Modifier une catégorie",
-					"request": {
-						"method": "PUT",
-						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Cardio avancé\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/categories/:id",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "categories", ":id"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Supprimer une catégorie",
-					"request": {
-						"method": "DELETE",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/categories/:id",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "categories", ":id"]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Filtres (admin)",
-			"item": [
-				{
-					"name": "Créer un filtre",
-					"request": {
-						"method": "POST",
-						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Sans matériel\",\n  \"type\": \"exercise\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/filters",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "filters"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Voir tous les filtres",
-					"request": {
-						"method": "GET",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/filters",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "filters"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Modifier un filtre",
-					"request": {
-						"method": "PUT",
-						"header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Sans matériel (débutant)\"\n}",
-							"options": { "raw": { "language": "json" } }
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/filters/:id",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "filters", ":id"]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Supprimer un filtre",
-					"request": {
-						"method": "DELETE",
-						"url": {
-							"raw": "http://localhost:3000/api/admin/filters/:id",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "3000",
-							"path": ["api", "admin", "filters", ":id"]
-						}
-					},
-					"response": []
-				}
-			]
+			},
+			"response": []
 		}
 	]
 }
