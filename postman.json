@@ -1656,6 +1656,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "OK Classement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1OGQxNWY2ZDc1MDBjYTc1N2JlZCIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTQ0NjUsImV4cCI6MTc1Mjc5ODA2NX0.4jfAlxTwIrHQPUsQoeAIgFjtVAKVTE_P9-8OPn-uixE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/classement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"classement"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

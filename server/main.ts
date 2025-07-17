@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.routes';
 import gymRoutes from './routes/gym.routes';
 import challengeRoutes from './routes/challenge.routes';
 import participationRoutes from './routes/participation.routes';
+import classementRouter from './routes/classement.routes';
 
 import userRoutes from './routes/admin/user.routes'
 import adminGymRoutes from './routes/admin/gym.routes'
@@ -15,6 +16,7 @@ import adminRewardsRoutes from './routes/admin/rewards.route';
 import adminStatusRoutes from './routes/admin/status.routes';
 import adminCategoryRoutes from './routes/admin/category.routes';
 import adminFilterRoutes from './routes/admin/filter.routes';
+
 
 // --------- | IMPORTANT : Les routes et middlewares doivent retounrer void !!!! | ---------
 
@@ -37,6 +39,7 @@ app.use('/api/admin/gyms', adminGymRoutes);
 app.use('/api/gyms', gymRoutes);
 app.use('/api/challenges', challengeRoutes);
 app.use('/api/participations', participationRoutes); 
+app.use('/api/classement', classementRouter);
 app.use('/api/admin/exercices', adminExercicesRoutes);
 app.use('/api/admin/badges', adminBadgesRoutes);
 app.use('/api/admin/rewards', adminRewardsRoutes);
