@@ -1,157 +1,304 @@
 {
 	"info": {
-		"_postman_id": "bfbbb698-d16a-497c-b5dd-85aff1fd5bfc",
+		"_postman_id": "a44db3f2-8505-4bb2-9ab2-ca376dc9d7c4",
 		"name": "projet node",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26777902"
+		"_exporter_id": "32140452"
 	},
 	"item": [
 		{
-			"name": "Gyms (admin)",
+			"name": "1 Authentication",
 			"item": [
 				{
-					"name": "Voir toutes les salles",
+					"name": "Register Admin (penser à changer le role dans la base de données)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    console.log('Admin créé avec succès');",
+									"} else {",
+									"    console.log('Admin existe déjà ou erreur');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YjFkNWY2ZDc1MDBjYTc1N2JmMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mjc4NDAwMiwiZXhwIjoxNzUyNzg3NjAyfQ.mDCMSwIkP8Cu8k8PEMNyOAZIG2Un_tZsVNcMD6W0vWU",
-									"type": "string"
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstname\": \"Admin\",\n  \"lastname\": \"System\",\n  \"email\": \"admin@system.com\",\n  \"password\": \"admin123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
-						"method": "GET",
-						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/auth/register/client",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"gyms"
+								"auth",
+								"register",
+								"client"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Approuver une salle",
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const responseJson = pm.response.json();",
+									"    pm.collectionVariables.set('adminToken', responseJson.token);",
+									"    console.log('Token admin sauvegardé:', responseJson.token);",
+									"} else {",
+									"    console.log('Erreur de connexion admin');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YjFkNWY2ZDc1MDBjYTc1N2JmMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mjc4NDAwMiwiZXhwIjoxNzUyNzg3NjAyfQ.mDCMSwIkP8Cu8k8PEMNyOAZIG2Un_tZsVNcMD6W0vWU",
-									"type": "string"
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@system.com\",\n  \"password\": \"admin123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
-						"method": "PATCH",
-						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms/approve/68795bdd5f6d7500ca757bf7",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/auth/login",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"gyms",
-								"approve",
-								"68795bdd5f6d7500ca757bf7"
+								"auth",
+								"login"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Désapprouver une salle",
+					"name": "Register Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    console.log('Client créé avec succès');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "PATCH",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"email\": \"client@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms/disapprove/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/auth/register/client",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"gyms",
-								"disapprove",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id"
-								}
+								"auth",
+								"register",
+								"client"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Modifier une salle",
+					"name": "Login Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const responseJson = pm.response.json();",
+									"    pm.collectionVariables.set('clientToken', responseJson.token);",
+									"    console.log('Token client sauvegardé:', responseJson.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "PUT",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"client@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms/edit/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/auth/login",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"gyms",
-								"edit",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id"
-								}
+								"auth",
+								"login"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Supprimer une salle",
+					"name": "Register Gym Owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    console.log('Propriétaire de salle créé avec succès');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "DELETE",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstname\": \"Gym\",\n  \"lastname\": \"Owner\",\n  \"email\": \"gym-owner@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/gyms/delete/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/auth/register/gym-owner",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"gyms",
-								"delete",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id"
+								"auth",
+								"register",
+								"gym-owner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Gym Owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const responseJson = pm.response.json();",
+									"    pm.collectionVariables.set('gymOwnerToken', responseJson.token);",
+									"    console.log('Token propriétaire sauvegardé:', responseJson.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"gym-owner@test.com\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
 							]
 						}
 					},
@@ -160,7 +307,7 @@
 			]
 		},
 		{
-			"name": "Type exercice (admin)",
+			"name": "2 Type exercice (admin)",
 			"item": [
 				{
 					"name": "Créer un type d'exercice",
@@ -170,7 +317,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YjFkNWY2ZDc1MDBjYTc1N2JmMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mjc4NDAwMiwiZXhwIjoxNzUyNzg3NjAyfQ.mDCMSwIkP8Cu8k8PEMNyOAZIG2Un_tZsVNcMD6W0vWU",
+									"value": "{{adminToken}}",
 									"type": "string"
 								}
 							]
@@ -193,12 +340,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/exercices",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/exercices",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -216,7 +361,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YjFkNWY2ZDc1MDBjYTc1N2JmMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mjc4NDAwMiwiZXhwIjoxNzUyNzg3NjAyfQ.mDCMSwIkP8Cu8k8PEMNyOAZIG2Un_tZsVNcMD6W0vWU",
+									"value": "{{adminToken}}",
 									"type": "string"
 								}
 							]
@@ -224,12 +369,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/exercices",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/exercices",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -242,6 +385,16 @@
 				{
 					"name": "Modifier un type d'exercice",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -260,12 +413,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/exercices/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/exercices/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -285,15 +436,23 @@
 				{
 					"name": "Supprimer un type d'exercice",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/exercices/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/exercices/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -302,7 +461,8 @@
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -312,11 +472,21 @@
 			]
 		},
 		{
-			"name": "Badges (admin)",
+			"name": "3 Badges (admin)",
 			"item": [
 				{
 					"name": "Créer un badge",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -335,12 +505,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/badges",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/badges",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -353,15 +521,23 @@
 				{
 					"name": "Voir tous les badges",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/badges",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/badges",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -374,6 +550,16 @@
 				{
 					"name": "Modifier un badge",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -392,12 +578,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/badges/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/badges/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -406,7 +590,8 @@
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -416,15 +601,23 @@
 				{
 					"name": "Supprimer un badge",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/badges/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/badges/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -433,7 +626,8 @@
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -443,15 +637,23 @@
 				{
 					"name": "Attribuer un badge à un user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/badges/give/:userId/:badgeId",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/badges/give/:userId/:badgeId",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -462,10 +664,12 @@
 							],
 							"variable": [
 								{
-									"key": "userId"
+									"key": "userId",
+									"value": ""
 								},
 								{
-									"key": "badgeId"
+									"key": "badgeId",
+									"value": ""
 								}
 							]
 						}
@@ -475,15 +679,23 @@
 				{
 					"name": "Retirer un badge à un user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/badges/remove/:userId/:badgeId",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/badges/remove/:userId/:badgeId",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -494,10 +706,12 @@
 							],
 							"variable": [
 								{
-									"key": "userId"
+									"key": "userId",
+									"value": ""
 								},
 								{
-									"key": "badgeId"
+									"key": "badgeId",
+									"value": ""
 								}
 							]
 						}
@@ -507,180 +721,28 @@
 			]
 		},
 		{
-			"name": "Récompenses (admin)",
-			"item": [
-				{
-					"name": "Créer une récompense",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"all_badges\",\n  \"description\": \"A obtenu tous les badges\",\n  \"condition\": \"all_badges\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/rewards",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"rewards"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Voir toutes les récompenses",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/admin/rewards",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"rewards"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Modifier une récompense",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Maître du fitness modifié\",\n  \"description\": \"Description modifiée\",\n  \"condition\": \"all_badges\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/admin/rewards/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"rewards",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Supprimer une récompense",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/admin/rewards/:id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"rewards",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Attribuer automatiquement une récompense (tous les badges)",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/admin/rewards/auto/assign/:userId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"admin",
-								"rewards",
-								"auto",
-								"assign",
-								":userId"
-							],
-							"variable": [
-								{
-									"key": "userId"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "status utilisateurs (admin)",
+			"name": "4 Status utilisateurs (admin)",
 			"item": [
 				{
 					"name": "Voir les utilisateurs actifs",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/status/active",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/status/active",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -694,15 +756,23 @@
 				{
 					"name": "Voir les utilisateurs inactifs",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/status/inactive",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/status/inactive",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -716,15 +786,23 @@
 				{
 					"name": "Désactiver un utilisateur",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/status/deactivate/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/status/deactivate/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -734,7 +812,8 @@
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -744,15 +823,23 @@
 				{
 					"name": "Activer un utilisateur",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/status/activate/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/status/activate/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -762,7 +849,8 @@
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -772,11 +860,21 @@
 			]
 		},
 		{
-			"name": "Utilisateurs (admin)",
+			"name": "5 Gym Owner Endpoints",
 			"item": [
 				{
-					"name": "Créer un utilisateur",
+					"name": "Créer une salle de gym",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{gymOwnerToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -787,7 +885,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"firstname\": \"Admin\",\n  \"lastname\": \"Test\",\n  \"email\": \"admin@test.com\",\n  \"password\": \"123456\",\n  \"role\": \"proprietaire\"\n}",
+							"raw": "{\n  \"name\": \"Titanium Fitness\",\n  \"address\": \"45 rue du Muscle, Paris\",\n  \"equipments\": [\"haltères\", \"rameur\", \"tapis de course\"],\n  \"description\": \"Salle premium avec coaching personnalisé\",\n  \"activities\": [\"crossfit\", \"yoga\", \"cardio\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -795,17 +893,733 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/users/create",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/gyms",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
+							"path": [
+								"api",
+								"gyms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir mes salles de gym",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{gymOwnerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/gyms/my",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"gyms",
+								"my"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une salle de gym",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{gymOwnerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Salle modifiée\",\n  \"address\": \"Nouvelle adresse\",\n  \"equipments\": [\"tapis\", \"haltères\", \"rameur\"],\n  \"description\": \"Description mise à jour\",\n  \"activities\": [\"cardio\", \"musculation\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/gyms/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"gyms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une salle de gym",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{gymOwnerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/gyms/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"gyms",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6 Gyms (admin)",
+			"item": [
+				{
+					"name": "Voir toutes les salles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/gyms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"gyms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approuver une salle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/gyms/approve/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"approve",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "68795bdd5f6d7500ca757bf7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Désapprouver une salle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/gyms/disapprove/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"disapprove",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une salle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Salle modifiée\",\n  \"address\": \"Nouvelle adresse\",\n  \"equipments\": [\"haltères\", \"tapis de course\"],\n  \"description\": \"Description mise à jour\",\n  \"activities\": [\"cardio\", \"musculation\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/gyms/edit/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"edit",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une salle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/gyms/delete/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"gyms",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "7 Catégories (admin)",
+			"item": [
+				{
+					"name": "Créer une catégorie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cardio\",\n  \"type\": \"exercise\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir toutes les catégories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier une catégorie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cardio avancé\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/categories/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer une catégorie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/categories/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "8 Filtres (admin)",
+			"item": [
+				{
+					"name": "Créer un filtre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sans matériel\",\n  \"type\": \"exercise\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/filters",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"filters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir tous les filtres",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/filters",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"filters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifier un filtre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sans matériel (débutant)\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/filters/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"filters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer un filtre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/filters/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"filters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "9 Utilisateurs (admin)",
+			"item": [
+				{
+					"name": "Créer un utilisateur",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstname\": \"Nouvel\",\n  \"lastname\": \"Utilisateur\",\n  \"email\": \"nouvel.user@test.com\",\n  \"password\": \"123456\",\n  \"role\": \"client\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users/create",
+							"host": [
+								"{{baseUrl}}"
+							],
 							"path": [
 								"api",
 								"admin",
 								"users",
 								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Récupérer les users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users"
 							]
 						}
 					},
@@ -819,7 +1633,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzBlZjZmMzk1YmQzNzlhMjFmZGJhMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjI0ODk5NCwiZXhwIjoxNzUyMjUyNTk0fQ.gWtX73n7WfQdd5BjmlRpSumaN1N0tMcaxlzaOSC9IxE",
+									"value": "{{adminToken}}",
 									"type": "string"
 								}
 							]
@@ -827,12 +1641,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/users/delete-user/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/users/delete-user/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
@@ -853,11 +1665,21 @@
 			]
 		},
 		{
-			"name": "Catégories (admin)",
+			"name": "10 Récompenses (admin)",
 			"item": [
 				{
-					"name": "Créer une catégorie",
+					"name": "Créer une récompense",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -868,7 +1690,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Cardio\",\n  \"type\": \"exercise\"\n}",
+							"raw": "{\n  \"name\": \"all_badges\",\n  \"description\": \"A obtenu tous les badges\",\n  \"condition\": \"all_badges\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -876,45 +1698,61 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/categories",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/rewards",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
-								"categories"
+								"rewards"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Voir toutes les catégories",
+					"name": "Voir toutes les récompenses",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/categories",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/rewards",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
-								"categories"
+								"rewards"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Modifier une catégorie",
+					"name": "Modifier une récompense",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -925,7 +1763,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Cardio avancé\"\n}",
+							"raw": "{\n  \"name\": \"Maître du fitness modifié\",\n  \"description\": \"Description modifiée\",\n  \"condition\": \"all_badges\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -933,21 +1771,20 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/categories/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/rewards/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
-								"categories",
+								"rewards",
 								":id"
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -955,26 +1792,73 @@
 					"response": []
 				},
 				{
-					"name": "Supprimer une catégorie",
+					"name": "Supprimer une récompense",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/categories/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/admin/rewards/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"admin",
-								"categories",
+								"rewards",
 								":id"
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attribuer automatiquement une récompense (tous les badges)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/rewards/auto/assign/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"rewards",
+								"auto",
+								"assign",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": ""
 								}
 							]
 						}
@@ -984,11 +1868,21 @@
 			]
 		},
 		{
-			"name": "Filtres (admin)",
+			"name": "Client Endpoints",
 			"item": [
 				{
-					"name": "Créer un filtre",
+					"name": "Créer un challenge",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -999,7 +1893,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Sans matériel\",\n  \"type\": \"exercise\"\n}",
+							"raw": "{\n  \"title\": \"Défi push-up\",\n  \"description\": \"Faites 100 pompes le plus rapidement possible\",\n  \"duration\": 20,\n  \"difficulty\": \"moyen\",\n  \"type\": \"renforcement musculaire\",\n  \"gym\": \"68795bdd5f6d7500ca757bf7\",\n  \"exercises\" : [\"68795df15f6d7500ca757c00\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1007,45 +1901,50 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/filters",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/challenges/",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"filters"
+								"challenges",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Voir tous les filtres",
+					"name": "Récupérer les challenges",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/filters",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/challenges",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"filters"
+								"challenges"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Modifier un filtre",
+					"name": "Modifier un challenge",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -1056,7 +1955,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Sans matériel (débutant)\"\n}",
+							"raw": "{\n  \"description\": \"Mise à jour du défi : 150 pompes par jour\",\n  \"duration\": 20\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1064,21 +1963,19 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/admin/filters/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/challenges/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"filters",
+								"challenges",
 								":id"
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -1086,606 +1983,257 @@
 					"response": []
 				},
 				{
-					"name": "Supprimer un filtre",
+					"name": "Supprimer un challenge",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/admin/filters/:id",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/api/challenges/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
-								"admin",
-								"filters",
+								"challenges",
 								":id"
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": ""
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rejoindre un challenge (participation)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/challenges/:challengeId/join",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"challenges",
+								":challengeId",
+								"join"
+							],
+							"variable": [
+								{
+									"key": "challengeId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir mes participations",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/participations/mine",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"participations",
+								"mine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mettre à jour sa progression",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"exerciseId\": \"68822eea5bd503d487b44ccc\",\n  \"duration_sec\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/participations/68822ef15bd503d487b44cd0/update-progression",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"participations",
+								"68822ef15bd503d487b44cd0",
+								"update-progression"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Marquer une participation comme terminée",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/participations/:participation_id/complete",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"participations",
+								":participation_id",
+								"complete"
+							],
+							"variable": [
+								{
+									"key": "participation_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Classement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/classement",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"classement"
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "OK S'inscrire (ajouter /client ou /gym-owner)",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"firstname\": \"jonh\",\r\n  \"lastname\": \"doe\",\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"123456\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/auth/register/client",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"auth",
-						"register",
-						"client"
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3001",
+			"type": "string"
 		},
 		{
-			"name": "OK Se connecter",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"123456\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/auth/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"auth",
-						"login"
-					]
-				}
-			},
-			"response": []
+			"key": "adminToken",
+			"value": "",
+			"type": "string"
 		},
 		{
-			"name": "OK Récupérer les users",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/users/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"users",
-						""
-					]
-				}
-			},
-			"response": []
+			"key": "clientToken",
+			"value": "",
+			"type": "string"
 		},
 		{
-			"name": "OK Créer une salle de gym",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1YWJhNWY2ZDc1MDBjYTc1N2JmMSIsInJvbGUiOiJneW0tb3duZXIiLCJpYXQiOjE3NTI3ODM4MDYsImV4cCI6MTc1Mjc4NzQwNn0.Z4Hx_Z4BcOoaeSRQHbmhkHacz8OvyB7oevSp9m4Sx1E",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Titanium Fitness\",\r\n  \"address\": \"45 rue du Muscle, Paris\",\r\n  \"equipments\": [\"haltères\", \"rameur\", \"tapis de course\"],\r\n  \"description\": \"Salle premium avec coaching personnalisé\",\r\n  \"activities\": [\"crossfit\", \"yoga\", \"cardio\"]\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/gyms",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"gyms"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Voir mes salle de gym",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/gyms/my",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"gyms",
-						"my"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Modifier une salle de gym",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Sane\",\r\n  \"address\": \"12uscu\",\r\n  \"equipments\": [\"tapis\", \"haltères\", \"rameur\"],\r\n  \"description\": \"Une e pour tous niveaux\",\r\n  \"activities\": [\"cardio\", \"musculation\"]\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/gyms/gyms/686a4ee66d0156da0bc60f54",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"gyms",
-						"gyms",
-						"686a4ee66d0156da0bc60f54"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Supprimer une salle de gym",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "\tapplication/json",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "http://localhost:3000/gyms/gyms/68680dd10b95f6398dd280b4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"gyms",
-						"gyms",
-						"68680dd10b95f6398dd280b4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK créer un challenge",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1OGQxNWY2ZDc1MDBjYTc1N2JlZCIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTIzNzUsImV4cCI6MTc1Mjc5NTk3NX0.u8uPjN3AXp5KHPlXVW6OwSw1x3g-HMoVeNmVqzWF91I",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"defi push-up\",\r\n  \"description\": \"Faites 100 pompes le plus rapidement possible\",\r\n  \"duration\": 20,\r\n  \"difficulty\": \"moyen\",\r\n  \"type\": \"renforcement musculaire\",\r\n  \"gym\": \"68795bdd5f6d7500ca757bf7\",\r\n  \"exercises\" : [\"68795df15f6d7500ca757c00\"]\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/challenges/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"challenges",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Récupérer les challenges",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/challenges",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"challenges"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Récupérer mes challenges",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/challenges/challenges/mine",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"challenges",
-						"challenges",
-						"mine"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Récupérer le challenge d'une salle",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/challenges/challenges/gym/6866f77867bc89b13cdea541",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"challenges",
-						"challenges",
-						"gym",
-						"6866f77867bc89b13cdea541"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Modifier un challenge",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"description\": \"Mise à jour du défi : 150 pompes par jour\",\r\n  \"duration\": 20\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/challenges/686a546be797bebac0c3a314",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"challenges",
-						"686a546be797bebac0c3a314"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Supprimer un challenge",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmE0YTBjYTYyZTFlYjE5OGY1ZWRhYiIsImlhdCI6MTc1MTc5NzIxNCwiZXhwIjoxNzUxODAwODE0fQ.IYuGAXHvakS6TTHLRxL7vMgqcAewQWZRlZmPbBD4Y3U",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/challenges/686a4fe06d0156da0bc60f5b",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"challenges",
-						"686a4fe06d0156da0bc60f5b"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Rejoindre un challenge (participation)",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk2MWQyNWZmNmJkMDhhM2Q5NzQzNyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTI1NDksImV4cCI6MTc1Mjc5NjE0OX0.Utu4tEjUE2o8bJ9et3WSco2xeJ4x7bbKT_AD1Ge_8s0",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/challenges/68797dbc115d8e6a0fc0d0ba/join",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"challenges",
-						"68797dbc115d8e6a0fc0d0ba",
-						"join"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Voir mes participation",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk2MWQyNWZmNmJkMDhhM2Q5NzQzNyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTI1NDksImV4cCI6MTc1Mjc5NjE0OX0.Utu4tEjUE2o8bJ9et3WSco2xeJ4x7bbKT_AD1Ge_8s0",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/participations/mine",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"participations",
-						"mine"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Mettre à jour sa progression",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk2MWQyNWZmNmJkMDhhM2Q5NzQzNyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTI1NDksImV4cCI6MTc1Mjc5NjE0OX0.Utu4tEjUE2o8bJ9et3WSco2xeJ4x7bbKT_AD1Ge_8s0",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"exerciseId\": \"68795df15f6d7500ca757c00\",\r\n    \"duration_sec\": 50\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/api/participations/:participation_id/update-progression",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"participations",
-						":participation_id",
-						"update-progression"
-					],
-					"variable": [
-						{
-							"key": "participation_id",
-							"value": ""
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Marquer une participation comme terminée",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk2MWQyNWZmNmJkMDhhM2Q5NzQzNyIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTI1NDksImV4cCI6MTc1Mjc5NjE0OX0.Utu4tEjUE2o8bJ9et3WSco2xeJ4x7bbKT_AD1Ge_8s0",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PATCH",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/participations/:participation_id/complete",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"participations",
-						":participation_id",
-						"complete"
-					],
-					"variable": [
-						{
-							"key": "participation_id",
-							"value": ""
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "OK Classement",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Nzk1OGQxNWY2ZDc1MDBjYTc1N2JlZCIsInJvbGUiOiJjbGllbnQiLCJpYXQiOjE3NTI3OTQ0NjUsImV4cCI6MTc1Mjc5ODA2NX0.4jfAlxTwIrHQPUsQoeAIgFjtVAKVTE_P9-8OPn-uixE",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/classement",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"classement"
-					]
-				}
-			},
-			"response": []
+			"key": "gymOwnerToken",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
